@@ -1,0 +1,24 @@
+/*Priority queues are a type of container adaptors, specifically designed such that its first element is always
+the greatest of the elements it contains, according to some strict weak ordering criterion.
+
+This context is similar to a heap, where elements can be inserted at any moment,
+and only the max heap element can be retrieved (the one at the top in the priority queue).*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    priority_queue<int> pq;
+    pq.push(1);
+    pq.push(16);
+    pq.push(6);
+    pq.push(13);
+    while ( !pq.empty() ){
+    cout << pq.top() << endl;
+    pq.pop();
+    }
+
+    return 0;
+}
+
