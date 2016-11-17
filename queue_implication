@@ -1,0 +1,55 @@
+///Queue Implementations with  stl & construction of  queue
+
+#include<bits/stdc++.h>
+#include<queue> ///if u did not use <bits/stdc++.h>
+using namespace std;
+
+int main ()
+{
+    queue<int>myqueue; ///declare myqueue
+    for(int i=0; i<10; i++){
+        myqueue.push(i); ///enqueueing vale in myqueue
+    }
+
+    cout<<myqueue.size()<<endl; ///size of queue
+    cout<<myqueue.front()<<endl;///print first element of myqueue
+    cout<<myqueue.back()<<endl;///print last element of myqueue
+    while(!myqueue.empty()){ ///check myqueue is empty?
+            cout<<myqueue.front()<<endl;
+            myqueue.pop(); ///delete sequence of value from front value
+    }
+    queue<int>another;
+    another.push(1);
+    another.push(2);
+    another.emplace(4);
+
+    another.swap(myqueue);///swaping another and myqueue. Remember u can only swap when the both queue is same datatype
+    ///or
+    swap(another,myqueue);
+
+    queue<string>str_queue;
+    str_queue.emplace("Nstu");
+    str_queue.emplace("s_cube"); ///emplace() is used just pushingdata
+
+
+    ///construct queue
+
+    deque<int> mydeck (3,100);        /// deque with 3 elements
+    list<int> mylist (2,200);         /// list with 2 elements
+
+    queue<int> first;                 /// empty queue
+    queue<int> second (mydeck);       /// queue initialized to copy of deque
+
+    queue<int,list<int> > third; /// empty queue with list as underlying container
+    queue<int,list<int> > fourth (mylist);///add container value of list to queue
+
+  cout << "size of first: " << first.size() << '\n';
+  cout << "size of second: " << second.size() << '\n';
+  cout << "size of third: " << third.size() << '\n';
+  cout << "size of fourth: " << fourth.size() << '\n';
+
+
+
+  return 0;
+}
+
