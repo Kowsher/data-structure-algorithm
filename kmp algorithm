@@ -1,0 +1,55 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+void prefix(string pat, int Pi[])
+{
+    int m = pat.length(), k;
+    Pi[0] = -1;
+    for (int i = 1; i < m; i++){
+        k = Pi[i - 1];
+        while (k >= 0)
+        {
+            if (pat[k] == pat[i - 1]){break;}
+            else{k = Pi[k];}
+        }
+        Pi[i] = k + 1;
+    }
+}
+//check whether target string contains pattern
+bool KMP(string pat, string target)
+{
+    int m = pat.length();
+    int n = target.length();
+    int Pi[m];
+    prefix(pat, Pi);
+    int i = 0;
+    int k = 0;
+    while (i < n){
+        if (k == -1){
+            i++;
+            k = 0;
+        }
+        else if (target[i] == pat[k]){
+            i++;
+            k++;
+            if (k == m)
+            return 1;
+        }
+        else
+            k = Pi[k];
+    }
+    return 0;
+}
+int main()
+{
+    string tar,pat;
+    cout<<"Input a string :"; cin>>tar;
+    cout<<"Input pattern :";cin>>pat;
+    if (KMP(pat, tar))
+        cout<<"'"<<pat<<"' found in string '"<<tar<<"'"<<endl;
+    else
+        cout<<"'"<<pat<<"' not found in string '"<<tar<<"'"<<endl;
+
+
+    return 0;
+}
