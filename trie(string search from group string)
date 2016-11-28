@@ -1,0 +1,56 @@
+///string search from a group of string 
+///The complexity of creating a trie is O(W*L), where W is the number of words, and L is an average length of the word
+
+#include<bits/stdc++.h>
+using namespace std;
+
+struct node 
+{
+    bool endmark;
+    node *next[26+1]; 
+    node(){
+        endmark = false;
+        for(int i=0; i<26; i++){next[i]=NULL;}
+    }
+}*root;
+void insert(string str,int len){
+    node *curr= root;
+    for(int i=0; i<len; i++){
+        int id=str[i]-'a';
+        if(curr->next[id]==NULL){
+            curr->next[id]=new node();
+        }
+        curr=curr->next[id];
+    }
+    curr->endmark=true;
+
+}
+bool search(string pat, int len){
+    node *curr=root;
+    for(int i=0; i<len; i++){
+        int id=pat[i]-'a';
+        if(curr->next[id]==NULL)return false;
+        curr=curr->next[id];
+    }
+
+}
+int main()
+{
+    int n,query;
+    string str,pat;
+    cout<<"Enter the number of word :";cin>>n;
+    root = new node();
+    for(int i=0; i<n; i++){
+        cin>>str;
+        insert(str,str.length());
+    }
+    cout<<"Enter the number of query :";cin>>query;
+    for(int i=0; i<query; i++){
+            cin>>pat;
+            if(search(pat,pat.length()))cout<<"Found"<<endl;
+            else cout<<"Not Found"<<endl;
+
+
+    }
+    return 0;
+}
