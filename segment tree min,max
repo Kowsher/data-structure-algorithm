@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define mx 100001
+
+int arr[mx];
+int tree[mx * 4];
+int init(int node, int b, int e)
+{
+    int x,y;
+    if (b == e) {
+        tree[node] = arr[b];
+        return tree[node];
+    }
+    int Left = node * 2;
+    int Right = node * 2 + 1;
+    int mid = (b + e) / 2;
+    x=init(Left, b, mid);
+    y=init(Right, mid + 1, e);
+    return tree[node]=max(x,y);
+    ///return tree[node]=min(x,y) ///for min value
+
+}
+int query(int node, int b, int e, int i, int j)
+{
+    if (i > e || j < b) return INT_MIN; ///return tree[node]=INT_MAX;
+    if (b >= i && e <= j) return tree[node];
+    int Left = node * 2;
+    int Right = node * 2 + 1;
+    int mid = (b + e) / 2;
+    int p1 = query(Left, b, mid, i, j);
+    int p2 = query(Right, mid + 1, e, i, j);
+    return max(p1,p2);///return min(p1,p2);
+}
+
+int main()
+{
+    int n,f,s,up,pos;
+    cout<<"Input the size of array: "; cin >> n;
+    cout<<"Input the value of array: ";
+    for(int i=1; i<=n; i++){cin>>arr[i];}
+    init(1, 1, n);
+
+    cout<<"Input the range for querying: ";
+    cin>>f>>s;
+    cout << query(1, 1, n, f, s) << endl;
+
+
+
+
+return 0;
+}
