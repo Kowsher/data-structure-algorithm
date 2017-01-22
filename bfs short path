@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<int>edge[100];
+bool visited[100];
+int p[100];
+
+int bfs(int start,int target)
+{
+    queue<int>q;
+    q.push(start);
+    visited[start]=1;
+    p[start]=start;
+    while(!q.empty()){
+        int u=q.front();
+        q.pop();
+        for(int i=0; i<edge[u].size();i++){
+            int v=edge[u][i];
+            if(visited[v]==0){
+                visited[v]=1;
+                p[v]=u;
+                q.push(v);
+            }
+        }
+    }
+    if(visited[target]==0){return 0;}
+    vector<int>path;
+    path.push_back(target);
+    int now=target;
+    while(now!=start){
+        now=p[now];
+        path.push_back(now);
+    }
+    reverse(path.begin(),path.end());
+    for(auto&x:path){
+        cout<<x<<" ";
+    }
+}
+int main()
+{
+    int e,u,v,start,target;
+    cout<<"Enter the edge of graph ";cin>>e;
+    cout<<"Input the connected node "<<endl;
+    for(int i=0; i<e-1; i++){
+        cin>>u>>v;
+        edge[u].push_back(v);
+        edge[v].push_back(u);
+    }
+    cout<<"Enter the node from starting to end ";cin>>start>>target;
+    bfs(start,target);
+
+
+    return 0;
+}
