@@ -8,7 +8,7 @@ int BinarSearch(int start, int End)
     if(arr[mid]==Search){return mid;}
     if(start==End ) return 0;
     if(Search<arr[mid]){End=mid-1;}
-    else {start=mid+1;}-
+    else {start=mid+1;}
     BinarSearch(start,End);
 }
 int main()
